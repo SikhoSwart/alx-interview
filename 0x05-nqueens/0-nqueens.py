@@ -1,69 +1,44 @@
 #!/usr/bin/python3
-"""N queens
-"""
-
+""" N queens """
 import sys
 
 
-def print_solution(board):
-    """print board"""
-    solution = []
-    for i in range(len(board)):
-        for j in range(len(board)):
-            if board[i][j] == 1:
-                solution.append([i, j])
-    print(solution)
+if len(sys.argv) > 2 or len(sys.argv) < 2:
+    print("Usage: nqueens N")
+    exit(1)
+
+if not sys.argv[1].isdigit():
+    print("N must be a number")
+    exit(1)
+
+if int(sys.argv[1]) < 4:
+    print("N must be at least 4")
+    exit(1)
+
+n = int(sys.argv[1])
 
 
-def safe(board, row, col, n):
-    """Function to check if a queen can be placed on board"""
-    for c in range(col):
-        if board[row][c] == 1:
-            return False
-
-    for r, c in zip(range(row, -1, -1),
-                    range(col, -1, -1)):
-        if board[r][c] == 1:
-            return False
-
-    for r, c in zip(range(row, n, 1),
-                    range(col, -1, -1)):
-        if board[r][c] == 1:
-            return False
-
-    return True
+def queens(n, i=0, a=[], b=[], c=[]):
+    """ find possible positions """
+    if i < n:
+        for j in range(n):
+            if j not in a and i + j not in b and i - j not in c:
+                yield from queens(n, i + 1, a + [j], b + [i + j], c + [i - j])
+    else:
+        yield a
 
 
-def solution(board, col, n):
-    if col == n:
-        print_solution(board)
-        return True
+def solve(n):
+    """ solve """
+    k = []
+    i = 0
+    for solution in queens(n, 0):
+        for s in solution:
+            k.append([i, s])
+            i += 1
+        print(k)
+        k = []
+        i = 0
 
-    c = False
-    for i in range(n):
-        if safe(board, i, col, n):
-            board[i][col] = 1
-            c = solution(board, col + 1, n) or c
-            board[i][col] = 0
-    return c
 
-
-if __name__ == "__main__":
-
-    if len(sys.argv) != 2:
-        print('Usage: nqueens N')
-        exit(1)
-
-    try:
-        n = int(sys.argv[1])
-
-    except Exception:
-        print('N must be a number')
-        exit(1)
-
-    if n < 4:
-        print('N must be at least 4')
-        exit(1)
-
-    board = [[0 for i in range(n)] for j in range(n)]
-    solution(board, 0, n)
+solve(n)
