@@ -1,5 +1,3 @@
-# :book: 0x09. Island Perimeter.
-## :page_with_curl: Topics Covered.
 Island Perimeter interview question.
 ### :page_with_curl: Task requirements.
 Create a function `def island_perimeter(grid):` that returns the perimeter of the island described in `grid`:
@@ -58,12 +56,3 @@ touch 0-main.py
 chmod +x 0-main.py
 ./0-main.py
 ```
-
-# :man: Author and Credits.
-This project was done by [SE. Moses Mwangi](https://github.com/MosesSoftEng). Feel free to get intouch with me;
-
-:iphone: WhatsApp [+254115227963](https://wa.me/254115227963)
-
-:email: Email [moses.soft.eng@gmail.com](mailto:moses.soft.eng@gmail.com)
-
-:thumbsup: A lot of thanks to [ALX-Africa Software Engineering](https://www.alxafrica.com/) program for the project requirements.
